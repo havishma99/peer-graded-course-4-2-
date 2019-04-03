@@ -1,0 +1,10 @@
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- SCC <- readRDS("Source_Classification_Code.rds")
+coal<- grepl("Coal",SCC$SCC.Level.Three)
+coal_data<-SCC[coal,]
+subset_data<-subset(NEI,NEI$SCC == coal_data$SCC)
+sum_data<-tapply(subset_data$Emissions,subset_data$year,sum) 
+n=names(sum_data)
+png("plot4.png",width=480,height=480)
+plot(n,sum_data,type="o",col=c("red"),xlab="year",ylab="Emissions",main="PM(2.5) Emission per year due to Coal Combustors")
+dev.off()

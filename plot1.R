@@ -1,0 +1,6 @@
+NEI <- readRDS("summarySCC_PM25.rds")
+sum_emission<-tapply(NEI$Emissions,NEI$year,sum)
+n=names(sum_emission)
+png("plot1.png",width=480,height=480)
+plot(n,sum_emission,type="o",col=c("green"),xlab="year",ylab="Emissions",main="Emission of PM(2.5) per year")
+dev.off()
